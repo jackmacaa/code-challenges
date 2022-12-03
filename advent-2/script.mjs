@@ -1,7 +1,14 @@
 import { data } from './data.mjs'
+const villianMap = {
+    A : 'rock',
+    B : 'paper',
+    C : 'scissors'
+}
+const win = 6;
+const draw = 3;
+const loss = 0;
 
 // PART 1
-
 const getHeroChoiceScore = (hero) => {
     if(hero === 'rock') {
         return 1
@@ -14,19 +21,11 @@ const getHeroChoiceScore = (hero) => {
 }
 
 const getMatchScore = (p1, p2) => {
-    const villianMap = {
-        A : 'rock',
-        B : 'paper',
-        C : 'scissors'
-    }
     const heroMap = {
         X : 'rock',
         Y : 'paper',
         Z : 'scissors'
     }
-    const win = 6;
-    const draw = 3;
-    const loss = 0;
     const villian = villianMap[p1];
     const hero = heroMap[p2];
 
@@ -67,22 +66,13 @@ const calculateTournamentScore = (tournamentRounds) => {
 }
 console.log(`Day 1: ${calculateTournamentScore(tournamentRounds)}`);
 
-
 // PART 2
 const getMatchScoreP2 = (p1, p2) => {
-    const villianMap = {
-        A : 'rock',
-        B : 'paper',
-        C : 'scissors'
-    }
     const heroMap = {
         X : 'lose',
         Y : 'draw',
         Z : 'win'
     }
-    const win = 6;
-    const draw = 3;
-    const loss = 0;
     const villian = villianMap[p1];
     const hero = heroMap[p2];
 
@@ -117,15 +107,9 @@ const getMatchScoreP2 = (p1, p2) => {
         return win + getHeroChoiceScore('rock')
     }
 }
-
-const sample = `A Y
-B X
-C Z`;
-
 const tournamentRoundsP2 = data.split('\n');
 const calculateTournamentScoreP2 = (tournamentRounds) => {
     let score = 0;
-    console.log(tournamentRounds)
     for (const round of tournamentRounds) {
         const picks = round.split(' ');
         score += getMatchScoreP2(picks[0], picks[1])
