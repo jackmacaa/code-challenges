@@ -1,3 +1,27 @@
+export const stacksP1 = [
+    ['B', 'G', 'S', 'C'],
+    ['T', 'M', 'W', 'H', 'J', 'N', 'V', 'G'],
+    ['M', 'Q', 'S'],
+    ['B', 'S', 'L', 'T', 'W', 'N', 'M'],
+    ['J', 'Z', 'F', 'T', 'V', 'G', 'W', 'P'],
+    ['C', 'T', 'B', 'G', 'Q', 'H', 'S'],
+    ['T', 'J', 'P', 'B', 'W'],
+    ['G', 'D', 'C', 'Z', 'F', 'T', 'Q', 'M'],
+    ['N', 'S', 'H', 'B', 'P', 'F']
+]
+
+export const stacksP2 = [
+    ['B', 'G', 'S', 'C'],
+    ['T', 'M', 'W', 'H', 'J', 'N', 'V', 'G'],
+    ['M', 'Q', 'S'],
+    ['B', 'S', 'L', 'T', 'W', 'N', 'M'],
+    ['J', 'Z', 'F', 'T', 'V', 'G', 'W', 'P'],
+    ['C', 'T', 'B', 'G', 'Q', 'H', 'S'],
+    ['T', 'J', 'P', 'B', 'W'],
+    ['G', 'D', 'C', 'Z', 'F', 'T', 'Q', 'M'],
+    ['N', 'S', 'H', 'B', 'P', 'F']
+]
+
 export const data = `move 2 from 4 to 2
 move 6 from 9 to 7
 move 4 from 7 to 2
