@@ -9,10 +9,10 @@ const sample = `2-4,6-8
 2-6,4-8
 12-80,12-81`;
 
-const pairs = sample.split('\n');
+const pairs = data.split('\n');
 const createElfSequence = (elf) => {
     const elf1Seq = [];
-    for(let i = elf[0]; i <= elf[1]; i++){
+    for(let i = Number(elf[0]); i <= elf[1]; i++){
         elf1Seq.push(i)
     }
     return elf1Seq
@@ -26,38 +26,37 @@ for (const pair of pairs) {
 
     const elf1Seq = createElfSequence(elf1);
     const elf2Seq = createElfSequence(elf2);
-   // console.log(`elf1: ${elf1}`)
-    //console.log(`elf2: ${elf2}`)
+
     let checkElf = false;
     // check if nums in elf1 are all in elf2
     for(let i = 0; i <= elf1Seq.length; i++) {
         if(!elf2Seq.includes(elf1Seq[i])) {
             break;
         }
-        //console.log(`elf1: ${elf1}`)
-        //console.log(`elf2: ${elf2}`)
-        checkElf = true;
+        if(i === elf1Seq.length - 1){
+            checkElf = true;
+        }
     }
 
     // check if nums in elf2
-    for(let i = 0; i <= elf2Seq.length; i++) {
+    for(let i = 0; i < elf2Seq.length; i++) {
         if(!elf1Seq.includes(elf2Seq[i])) {
             break;
         }
-        checkElf = true;
+        if(i === elf2Seq.length - 1){
+            checkElf = true;
+        }
     }
 
     if(checkElf){
-            console.log(`elf1: ${elf1}`)
-    console.log(`elf2: ${elf2}`)
         count++;
     }
+
     
 }
-console.log(count)
+console.log(`count ${count}`)
 
-
-
+// OPTION 1
 // let count = 0;
 // for (const pair of pairs) {
 //     const elf = pair.split(',')
