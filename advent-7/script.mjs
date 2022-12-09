@@ -3,28 +3,50 @@ import { data, input } from './data.mjs'
 // PART 1
 const commands = input.split('\n')
 
-let folders = []
+let folders = [
+
+]
+
+let current = '';
+
 for(const cmd of commands) {
     const regex$ = new RegExp(/[$]/gm)
     const regexCd = new RegExp(/[cd]/gm)
-    const regexCdName = new RegExp(/[a-z]$/gm)
-    const regexSlash = new RegExp(/[/]/gm)
-    const regexLs = new RegExp(/[ls]/gm)
+    const regexCdName = new RegExp(/[a-z]+$/gm)
+    const regexCmd = new RegExp(/[\/]+$/gm)
 
     if(regex$.test(cmd)) {
         if(regexCd.test(cmd)) {
-            if(regexSlash.test(cmd)) {
-                folders.push('/')
-            }
             const folderName = cmd.match(regexCdName)
-            if(folderName) {
-                folders.push(folderName)
-            }
+                if(folderName) {
+                    const selected = folders.find(element => element.name === current)
+                    if(selected){
+                        selected.child.push({
+                            name: folderName,
+                            isFolder: true,
+                            size: 0,
+                            child : []
+                        })
+                    }
+                    console.log('maatched ' + folderName)
+                } else {
+                    const command = cmd.match(regexCmd)
+                    if(command){
+                        folders.push({
+                            name: command,
+                            isFolder: true,
+                            size: 0,
+                            child : []
+                        })
+                        current = command
+                    }
+                }
+                
+        } else {
+            console.log('found command ' + cmd)
         }
+
     }
 
-    if(!regex$.test(cmd)){
-        folders.push(cmd + 'here')
-    }
 }
-console.log(JSON.stringify(folders))
+console.log(JSON.stringify(folders) + ' ' + current)
