@@ -1,0 +1,13 @@
+[
+  {
+    "name": "/",
+    "isFolder": true,
+    "size": 0,
+    "child": [
+      { "name": "a", "isFolder": true, "size": 0, "child": [] },
+      { "name": "b.txt", "isFolder": false, "size": "14848514", "child": [] },
+      { "name": "c.dat", "isFolder": false, "size": "8504156", "child": [] },
+      { "name": "d", "isFolder": true, "size": 0, "child": [] }
+    ]
+  }
+]

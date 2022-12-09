@@ -2,11 +2,7 @@ import { data, input } from './data.mjs'
 
 // PART 1
 const commands = input.split('\n')
-
-let folders = [
-
-]
-
+let folders = []
 let current = '';
 
 for(const cmd of commands) {
@@ -19,26 +15,19 @@ for(const cmd of commands) {
         if(regexCd.test(cmd)) {
             const folderName = cmd.match(regexCdName)
                 if(folderName) {
-                    const selected = folders.find(element => element.name === current)
-                    if(selected){
-                        selected.child.push({
-                            name: folderName,
-                            isFolder: true,
-                            size: 0,
-                            child : []
-                        })
-                    }
-                    console.log('maatched ' + folderName)
+                    current = folderName[0]
+                    console.log('cd ' + folderName)
+                    console.log('selected ' + JSON.stringify(current))
                 } else {
                     const command = cmd.match(regexCmd)
                     if(command){
                         folders.push({
-                            name: command,
+                            name: command[0],
                             isFolder: true,
                             size: 0,
                             child : []
                         })
-                        current = command
+                        current = command[0]
                     }
                 }
                 
@@ -46,6 +35,35 @@ for(const cmd of commands) {
             console.log('found command ' + cmd)
         }
 
+    } else {
+        // selecting the current folder
+        const selected = folders.find(element => element.name === current)
+        // checking if is dir or file
+        if(cmd.startsWith('dir')){
+            const folder = cmd.match(regexCdName)
+            if(selected){
+                selected.child.push({
+                    name: folder[0],
+                    isFolder: true,
+                    size: 0,
+                    child : []
+                })
+            }
+        } else {
+            const files = cmd.split(' ');
+            if(selected){
+                selected.child.push({
+                    name: files[1],
+                    isFolder: false,
+                    size: files[0],
+                    child : []
+                })
+            }
+        }
+        
+
+
+       
     }
 
 }
