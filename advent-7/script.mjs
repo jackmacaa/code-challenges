@@ -22,7 +22,11 @@ for(const cmd of commands) {
                 if(folderName) {
                     console.log({previous})
                     current = folderName[0]
-                    previous += `/${current}`
+                    if(previous === '/'){
+                        previous += `${current}`
+                    } else {
+                        previous += `/${current}`
+                    }
                     count++;
                 } else {
                     // finds symbols like / or ..
@@ -32,13 +36,18 @@ for(const cmd of commands) {
                         folders.push({
                             name: command[0],
                             isFolder: true,
-                            parent: previous,
+                            parent: '/',
                             child : []
                             
                         })
                         current = command[0]
                         previous += current
                     } else {
+                        console.log({previous})
+                        const remove = previous.split('/')
+                        const len =  remove.length - 1;
+                        previous = previous.replace('/' + remove[len], '')
+                        
                         count--;
                     }
                 }

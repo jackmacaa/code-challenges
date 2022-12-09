@@ -1012,22 +1012,22 @@ $ ls
 export const input = 
 `$ cd /
 $ ls
-dir ass
+dir a
 14848514 b.txt
 8504156 c.dat
-dir derr
-$ cd ass
+dir d
+$ cd a
 $ ls
-dir etf
+dir e
 29116 f
 2557 g
 62596 h.lst
-$ cd etf
+$ cd e
 $ ls
 584 i
 $ cd ..
 $ cd ..
-$ cd derr
+$ cd d
 $ ls
 4060174 j
 8033020 d.log

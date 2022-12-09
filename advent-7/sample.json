@@ -2,24 +2,24 @@
   {
     "name": "/",
     "isFolder": true,
-    "parent": "",
+    "parent": "/",
     "child": [
       {
-        "name": "ass",
+        "name": "a",
         "isFolder": true,
         "parent": "/",
         "child": [
           {
-            "name": "etf",
+            "name": "e",
             "isFolder": true,
-            "parent": "//ass",
+            "parent": "/a",
             "child": [
               {
                 "name": "i",
                 "isFolder": false,
                 "size": "584",
                 "child": [],
-                "parent": "//ass/etf"
+                "parent": "/a/e"
               }
             ]
           },
@@ -28,21 +28,21 @@
             "isFolder": false,
             "size": "29116",
             "child": [],
-            "parent": "//ass"
+            "parent": "/a"
           },
           {
             "name": "g",
             "isFolder": false,
             "size": "2557",
             "child": [],
-            "parent": "//ass"
+            "parent": "/a"
           },
           {
             "name": "h.lst",
             "isFolder": false,
             "size": "62596",
             "child": [],
-            "parent": "//ass"
+            "parent": "/a"
           }
         ]
       },
@@ -61,7 +61,7 @@
         "parent": "/"
       },
       {
-        "name": "derr",
+        "name": "d",
         "isFolder": true,
         "parent": "/",
         "child": [
@@ -70,28 +70,28 @@
             "isFolder": false,
             "size": "4060174",
             "child": [],
-            "parent": "//ass/etf/derr"
+            "parent": "/d"
           },
           {
             "name": "d.log",
             "isFolder": false,
             "size": "8033020",
             "child": [],
-            "parent": "//ass/etf/derr"
+            "parent": "/d"
           },
           {
             "name": "d.ext",
             "isFolder": false,
             "size": "5626152",
             "child": [],
-            "parent": "//ass/etf/derr"
+            "parent": "/d"
           },
           {
             "name": "k",
             "isFolder": false,
             "size": "7214296",
             "child": [],
-            "parent": "//ass/etf/derr"
+            "parent": "/d"
           }
         ]
       }
