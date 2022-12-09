@@ -1,7 +1,7 @@
 import { data, input } from './data.mjs'
 
 // PART 1
-const commands = input.split('\n')
+const commands = data.split('\n')
 let folders = []
 let current = '';
 let previous = '';
@@ -67,9 +67,17 @@ for(const cmd of commands) {
             //console.log({count})
             //console.log({current})
             selected = folders[0].child[0].child.find(element => element.name === current); 
+        } else if( count === 3){
+            //console.log({count})
+            //console.log({current})
+            selected = folders[0].child[0].child[0].child.find(element => element.name === current); 
+        } else if( count === 4){
+            console.log({count})
+            console.log({current})
+            selected = folders[0].child[0].child[0].child[0].child.find(element => element.name === current); 
         }
         
-        //console.log('selected found ' + selected)
+        console.log('selected found ' + selected)
         // checking if is dir or file
         if(cmd.startsWith('dir')){
             // creates folder in current dir
@@ -101,7 +109,7 @@ for(const cmd of commands) {
 
 const calculateFolders = (file) => {
     if(file.child.length === 0){
-        const retVal = [Number(file.isFolder ? 0 : file.size), `${file.parent}/${file.name}`, file.isFolder];
+        const retVal = [Number(file.isFolder ? 0 : file.size), file.isFolder];
         console.log(JSON.stringify(retVal), ',');
         return retVal;
     }
@@ -117,7 +125,7 @@ const calculateFolders = (file) => {
     }
 
     const currentSize = file.isFolder ? 0 : Number(file.size);
-    const retVal = [currentSize + childTotals, `${file.parent}/${file.name}`, file.isFolder];
+    const retVal = [currentSize + childTotals, file.isFolder];
     console.log(JSON.stringify(retVal), ',');
     return retVal;
 
@@ -125,6 +133,69 @@ const calculateFolders = (file) => {
 console.log('[');
 calculateFolders(folders[0]);
 console.log(']');
+
+const arr = [
+    [290515,false] ,
+    [102897,false] ,
+    [102897,true] ,
+    [122034,false] ,
+    [12680,false] ,
+    [49534,false] ,
+    [0,true] ,
+    [0,true] ,
+    [315267,false] ,
+    [294364,false] ,
+    [0,true] ,
+    [76621,false] ,
+    [285948,false] ,
+    [155914,false] ,
+    [0,true] ,
+    [1128114,true] ,
+    [18557,false] ,
+    [1724331,true] ,
+    [0,true] ,
+    [176761,false] ,
+    [176761,true] ,
+    [0,true] ,
+    [266338,false] ,
+    [287488,false] ,
+    [211569,false] ,
+    [231144,false] ,
+    [260476,false] ,
+    [1257015,true] ,
+    [0,true] ,
+    [0,true] ,
+    [0,true] ,
+    [213313,false] ,
+    [0,true] ,
+    [0,true] ,
+    [1614,false] ,
+    [0,true] ,
+    [0,true] ,
+    [0,true] ,
+    [214927,true] ,
+    [298050,false] ,
+    [0,true] ,
+    [0,true] ,
+    [0,true] ,
+    [0,true] ,
+    [51178,false] ,
+    [0,true] ,
+    [0,true] ,
+    [0,true] ,
+    [0,true] ,
+    [0,true] ,
+    [0,true] ,
+    [51178,true] ,
+    [3722262,true] ,
+    ]
+// count = 0;
+// for(let i = 0; i < arr.length; i++){
+//     if(arr[i][0] < 100000 && arr[i][1] === true){
+//         count+= arr[i][0]
+//     }
+// }
+// console.log(count)
 // console.log('[', calculateFolders(folders[0]), ']');
 
 //console.log(JSON.stringify(folders) + ' ' + current)
