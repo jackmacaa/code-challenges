@@ -2,7 +2,7 @@
   {
     "name": "/",
     "isFolder": true,
-    "parent": "/",
+    "parent": "",
     "child": [
       {
         "name": "a",

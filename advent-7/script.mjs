@@ -17,10 +17,10 @@ for(const cmd of commands) {
         if(regexCd.test(cmd)) {
             // finds letters
             const folderName = cmd.match(regexCdName)
-            console.log('cd dir ' + JSON.stringify(folderName))
+            //console.log('cd dir ' + JSON.stringify(folderName))
                 // when cd x is found swaps current to x
                 if(folderName) {
-                    console.log({previous})
+                    //console.log({previous})
                     current = folderName[0]
                     if(previous === '/'){
                         previous += `${current}`
@@ -31,29 +31,28 @@ for(const cmd of commands) {
                 } else {
                     // finds symbols like / or ..
                     const command = cmd.match(regexCmdSlash)
-                    console.log('cd cmd ' + JSON.stringify(command))
+                    //console.log('cd cmd ' + JSON.stringify(command))
                     if(command){
                         folders.push({
                             name: command[0],
                             isFolder: true,
-                            parent: '/',
+                            parent: '',
                             child : []
                             
                         })
                         current = command[0]
                         previous += current
                     } else {
-                        console.log({previous})
+                        //console.log({previous})
                         const remove = previous.split('/')
                         const len =  remove.length - 1;
                         previous = previous.replace('/' + remove[len], '')
-                        
                         count--;
                     }
                 }
                 
         } else {
-            console.log('found command ' + cmd)
+            //console.log('found command ' + cmd)
         }
 
     } else {
@@ -61,16 +60,16 @@ for(const cmd of commands) {
         if(count === 0){
             selected = folders.find(element => element.name === current);
         } else if(count === 1) {
-            console.log({count})
-            console.log({current})
+            //console.log({count})
+            //console.log({current})
             selected = folders[0].child.find(element => element.name === current); 
         } else if( count === 2){
-            console.log({count})
-            console.log({current})
+            //console.log({count})
+            //console.log({current})
             selected = folders[0].child[0].child.find(element => element.name === current); 
         }
         
-        console.log('selected found ' + selected)
+        //console.log('selected found ' + selected)
         // checking if is dir or file
         if(cmd.startsWith('dir')){
             // creates folder in current dir
@@ -100,11 +99,33 @@ for(const cmd of commands) {
 
 }
 
-// const calculateFolders = (folders) => {
-//     for(const folder in folders[0].child){
-//         console.log({folder})
-//     }
-// }
-// calculateFolders(folders);
-console.log(JSON.stringify(folders) + ' ' + current)
+const calculateFolders = (file) => {
+    if(file.child.length === 0){
+        const retVal = [Number(file.isFolder ? 0 : file.size), `${file.parent}/${file.name}`, file.isFolder];
+        console.log(JSON.stringify(retVal), ',');
+        return retVal;
+    }
+
+    const childSizes = file.child.map(child => {
+        const value = calculateFolders(child);
+        return value[0];
+    });
+
+    let childTotals = 0;
+    for (let i = 0; i < childSizes.length; i++) {
+        childTotals += childSizes[i];
+    }
+
+    const currentSize = file.isFolder ? 0 : Number(file.size);
+    const retVal = [currentSize + childTotals, `${file.parent}/${file.name}`, file.isFolder];
+    console.log(JSON.stringify(retVal), ',');
+    return retVal;
+
+}
+console.log('[');
+calculateFolders(folders[0]);
+console.log(']');
+// console.log('[', calculateFolders(folders[0]), ']');
+
+//console.log(JSON.stringify(folders) + ' ' + current)
 
