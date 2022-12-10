@@ -64,20 +64,40 @@ for(const cmd of commands) {
             //console.log({current})
             selected = folders[0].child.find(element => element.name === current); 
         } else if( count === 2){
-            //console.log({count})
-            //console.log({current})
-            selected = folders[0].child[0].child.find(element => element.name === current); 
-        } else if( count === 3){
-            //console.log({count})
-            //console.log({current})
-            selected = folders[0].child[0].child[0].child.find(element => element.name === current); 
-        } else if( count === 4){
+            // console.log({count})
+            // console.log({current})
+        for(let i = 0; i < folders[0].child.length; i++) {
+                selected = folders[0].child[i].child.find(element => element.name === current);
+                if(selected){
+                    break;
+                } 
+            }
+        } 
+        else if( count === 3){
+            // console.log({count})
+            // console.log({current})
+            for(let i = 0; i < folders[0].child[0].child.length; i++) {
+                selected = folders[0].child[0].child[i].child.find(element => element.name === current);
+                if(selected){
+                    break;
+                } 
+            }
+        } 
+        else if( count === 4){
+            // console.log({count})
+            // console.log({current})
+           // console.log(folders[0].child[0].child[0].child.length)
+            for(let i = 0; i < folders[0].child[0].child[0].child.length; i++) {
+                selected = folders[0].child[0].child[0].child[i].child.find(element => element.name === current);
+                if(selected){
+                    break;
+                } 
+            }
+        } if(count > 4){
             console.log({count})
-            console.log({current})
-            selected = folders[0].child[0].child[0].child[0].child.find(element => element.name === current); 
         }
         
-        console.log('selected found ' + selected)
+        //console.log('selected found ' + JSON.stringify(selected))
         // checking if is dir or file
         if(cmd.startsWith('dir')){
             // creates folder in current dir
@@ -97,7 +117,7 @@ for(const cmd of commands) {
                 selected.child.push({
                     name: files[1],
                     isFolder: false,
-                    size: files[0],
+                    size: Number(files[0]),
                     child : [],
                     parent: previous
                 })
@@ -106,6 +126,7 @@ for(const cmd of commands) {
     }
 
 }
+console.log(JSON.stringify(folders))
 
 const calculateFolders = (file) => {
     if(file.child.length === 0){
@@ -125,78 +146,25 @@ const calculateFolders = (file) => {
     }
 
     const currentSize = file.isFolder ? 0 : Number(file.size);
-    const retVal = [currentSize + childTotals, file.isFolder];
+    const retVal = [currentSize, childTotals, file.isFolder];
     console.log(JSON.stringify(retVal), ',');
     return retVal;
 
 }
-console.log('[');
-calculateFolders(folders[0]);
-console.log(']');
+// console.log('[');
+// calculateFolders(folders[0]);
+// console.log(']');
 
-const arr = [
-    [290515,false] ,
-    [102897,false] ,
-    [102897,true] ,
-    [122034,false] ,
-    [12680,false] ,
-    [49534,false] ,
-    [0,true] ,
-    [0,true] ,
-    [315267,false] ,
-    [294364,false] ,
-    [0,true] ,
-    [76621,false] ,
-    [285948,false] ,
-    [155914,false] ,
-    [0,true] ,
-    [1128114,true] ,
-    [18557,false] ,
-    [1724331,true] ,
-    [0,true] ,
-    [176761,false] ,
-    [176761,true] ,
-    [0,true] ,
-    [266338,false] ,
-    [287488,false] ,
-    [211569,false] ,
-    [231144,false] ,
-    [260476,false] ,
-    [1257015,true] ,
-    [0,true] ,
-    [0,true] ,
-    [0,true] ,
-    [213313,false] ,
-    [0,true] ,
-    [0,true] ,
-    [1614,false] ,
-    [0,true] ,
-    [0,true] ,
-    [0,true] ,
-    [214927,true] ,
-    [298050,false] ,
-    [0,true] ,
-    [0,true] ,
-    [0,true] ,
-    [0,true] ,
-    [51178,false] ,
-    [0,true] ,
-    [0,true] ,
-    [0,true] ,
-    [0,true] ,
-    [0,true] ,
-    [0,true] ,
-    [51178,true] ,
-    [3722262,true] ,
-    ]
+const arr = [ ]
 // count = 0;
 // for(let i = 0; i < arr.length; i++){
 //     if(arr[i][0] < 100000 && arr[i][1] === true){
+//         console.log(arr[i][0])
 //         count+= arr[i][0]
 //     }
 // }
 // console.log(count)
-// console.log('[', calculateFolders(folders[0]), ']');
+//console.log('[', calculateFolders(folders[0]), ']');
 
 //console.log(JSON.stringify(folders) + ' ' + current)
 
