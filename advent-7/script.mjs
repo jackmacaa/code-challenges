@@ -1,23 +1,46 @@
 import { data, input } from './data.mjs'
 
+const findSelected = (folders, current) => {
+    //console.log({current})
+    //console.log('selected ' + JSON.stringify(folders))
+    
+    let found = folders.child.find(element => element.name === current)
+   // console.log('FOUND ' + JSON.stringify(found))
+    if(found){
+        if(found.isFolder === true){
+            //console.log('HERE')
+            return found
+        }
+    }
+
+    for(let key in folders.child){
+      // console.log('key' + JSON.stringify(folders.child[key]))
+        if(folders.child.length > 0){
+           found =  findSelected(folders.child[key], current)
+        }
+        if(found){
+            return found
+        }
+    }
+
+}
 // PART 1
-const commands = data.split('\n')
+const commands = input.split('\n')
 let folders = []
 let current = '';
 let previous = '';
 let count = 0;
+let selected = '';
 
 for(const cmd of commands) {
     const regex$ = new RegExp(/[$]/gm)
     const regexCd = new RegExp(/[cd]/gm)
     const regexCdName = new RegExp(/[a-z]+$/gm)
     const regexCmdSlash = new RegExp(/[\/]+$/gm)
-
     if(regex$.test(cmd)) {
         if(regexCd.test(cmd)) {
             // finds letters
             const folderName = cmd.match(regexCdName)
-            //console.log('cd dir ' + JSON.stringify(folderName))
                 // when cd x is found swaps current to x
                 if(folderName) {
                     //console.log({previous})
@@ -31,14 +54,12 @@ for(const cmd of commands) {
                 } else {
                     // finds symbols like / or ..
                     const command = cmd.match(regexCmdSlash)
-                    //console.log('cd cmd ' + JSON.stringify(command))
                     if(command){
                         folders.push({
                             name: command[0],
                             isFolder: true,
                             parent: '',
-                            child : []
-                            
+                            child : []  
                         })
                         current = command[0]
                         previous += current
@@ -56,48 +77,15 @@ for(const cmd of commands) {
         }
 
     } else {
-        let selected = '';
-        if(count === 0){
-            selected = folders.find(element => element.name === current);
-        } else if(count === 1) {
-            //console.log({count})
-            //console.log({current})
-            selected = folders[0].child.find(element => element.name === current); 
-        } else if( count === 2){
-            // console.log({count})
-            // console.log({current})
-        for(let i = 0; i < folders[0].child.length; i++) {
-                selected = folders[0].child[i].child.find(element => element.name === current);
-                if(selected){
-                    break;
-                } 
-            }
-        } 
-        else if( count === 3){
-            // console.log({count})
-            // console.log({current})
-            for(let i = 0; i < folders[0].child[0].child.length; i++) {
-                selected = folders[0].child[0].child[i].child.find(element => element.name === current);
-                if(selected){
-                    break;
-                } 
-            }
-        } 
-        else if( count === 4){
-            // console.log({count})
-            // console.log({current})
-           // console.log(folders[0].child[0].child[0].child.length)
-            for(let i = 0; i < folders[0].child[0].child[0].child.length; i++) {
-                selected = folders[0].child[0].child[0].child[i].child.find(element => element.name === current);
-                if(selected){
-                    break;
-                } 
-            }
-        } if(count > 4){
-            console.log({count})
+        //console.log('CURRENT ' + current)
+        let selected = folders.find(element => element.name === current)
+       // console.log('SELLL '+ JSON.stringify(selected))
+        if(!selected) {
+            selected = findSelected(folders[0], current);
         }
-        
-        //console.log('selected found ' + JSON.stringify(selected))
+       // console.log('TOO')
+       // console.log('FODLERS '+ JSON.stringify(folders))
+       // console.log('OUTSIDE '+ JSON.stringify(selected))
         // checking if is dir or file
         if(cmd.startsWith('dir')){
             // creates folder in current dir
@@ -118,20 +106,21 @@ for(const cmd of commands) {
                     name: files[1],
                     isFolder: false,
                     size: Number(files[0]),
-                    child : [],
+                    child: [],
                     parent: previous
                 })
             }
+            //console.log(JSON.stringify(selected))
         }  
     }
 
 }
-console.log(JSON.stringify(folders))
+console.log('FOLDERS ' + JSON.stringify(folders))
 
 const calculateFolders = (file) => {
     if(file.child.length === 0){
-        const retVal = [Number(file.isFolder ? 0 : file.size), file.isFolder];
-        console.log(JSON.stringify(retVal), ',');
+        const retVal = [Number(file.isFolder ? 0 : file.size), file.isFolder, file.name];
+        //console.log(JSON.stringify(retVal), ',');
         return retVal;
     }
 
@@ -139,6 +128,7 @@ const calculateFolders = (file) => {
         const value = calculateFolders(child);
         return value[0];
     });
+    console.log(childSizes)
 
     let childTotals = 0;
     for (let i = 0; i < childSizes.length; i++) {
@@ -146,24 +136,29 @@ const calculateFolders = (file) => {
     }
 
     const currentSize = file.isFolder ? 0 : Number(file.size);
-    const retVal = [currentSize, childTotals, file.isFolder];
+    const retVal = [currentSize, childTotals, file.isFolder, file.name];
     console.log(JSON.stringify(retVal), ',');
     return retVal;
 
 }
-// console.log('[');
-// calculateFolders(folders[0]);
-// console.log(']');
+console.log('[');
+calculateFolders(folders[0]);
+console.log(']');
 
-const arr = [ ]
-// count = 0;
-// for(let i = 0; i < arr.length; i++){
-//     if(arr[i][0] < 100000 && arr[i][1] === true){
-//         console.log(arr[i][0])
-//         count+= arr[i][0]
-//     }
-// }
-// console.log(count)
+const arr = [
+    [0,584,true,"e"] ,
+    [0,94269,true,"a"] ,
+    [0,24933642,true,"d"] ,
+    [0,23352670,true,"/"] ,
+    ]  
+let count2 = 0;
+for(let i = 0; i < arr.length; i++){
+    if(arr[i][1] < 100000){
+        console.log(arr[i][1])
+    }
+
+}
+console.log(count2)
 //console.log('[', calculateFolders(folders[0]), ']');
 
 //console.log(JSON.stringify(folders) + ' ' + current)
