@@ -110,23 +110,32 @@ for(const cmd of commands) {
 }
 //console.log('FOLDERS ' + JSON.stringify(folders))
 
-const calculateFolders = (file) => {
-    if(file.child.length === 0){
-        const retVal = [file.isFolder ? 0 : file.size, file.name];
-        console.log(JSON.stringify(retVal), ',');
+const calculateFolders = (files) => {
+    if(files.child.length === 0){
+        const retVal = files.child.size;
+        //console.log(JSON.stringify(retVal), ',');
         return retVal;
     }
-
-    for(let key in file.child){
-
+    let temp = 0;
+    //console.log(files)
+    for(const file in files.child){
+       //console.log('here ' + JSON.stringify(files.child[file].child.length))
+        if(files.child[file].child.length > 0){
+         // console.log('here ' + JSON.stringify(files.child[file]))
+           const retVal =  calculateFolders(files.child[file])
+           console.log('here ' + JSON.stringify(retVal))
+          
+          // temp += retVal ? 
+        }
+     
+        
     }
-
-
-
+   // console.log(temp)
 }
-console.log('[');
-calculateFolders(folders[0]);
-console.log(']');
+
+// console.log('[');
+calculateFolders(folders[0])
+// console.log(']');
 
 // const arr = [
 //     [0,584,true,"e"] ,
