@@ -18,12 +18,10 @@ const findSelected = (folders, current) => {
     }
 }
 // PART 1
-const commands = input.split('\n')
+const commands = data.split('\n')
 let folders = []
 let current = '';
 let previous = '';
-let count = 0;
-let selected = '';
 
 for(const cmd of commands) {
     const regex$ = new RegExp(/[$]/gm)
@@ -36,14 +34,12 @@ for(const cmd of commands) {
             const folderName = cmd.match(regexCdName)
                 // when cd x is found swaps current to x
                 if(folderName) {
-                    //console.log({previous})
                     current = folderName[0]
                     if(previous === '/'){
                         previous += `${current}`
                     } else {
                         previous += `/${current}`
                     }
-                    count++;
                 } else {
                     // finds symbols like / or ..
                     const command = cmd.match(regexCmdSlash)
@@ -51,17 +47,16 @@ for(const cmd of commands) {
                         folders.push({
                             name: command[0],
                             isFolder: true,
+                            size: 0,
                             parent: '',
                             child : []  
                         })
                         current = command[0]
                         previous += current
                     } else {
-                        //console.log({previous})
                         const remove = previous.split('/')
                         const len =  remove.length - 1;
                         previous = previous.replace('/' + remove[len], '')
-                        count--;
                     }
                 }
                 
@@ -70,15 +65,10 @@ for(const cmd of commands) {
         }
 
     } else {
-        //console.log('CURRENT ' + current)
         let selected = folders.find(element => element.name === current)
-       // console.log('SELLL '+ JSON.stringify(selected))
         if(!selected) {
             selected = findSelected(folders[0], current);
         }
-       // console.log('TOO')
-       // console.log('FODLERS '+ JSON.stringify(folders))
-       // console.log('OUTSIDE '+ JSON.stringify(selected))
         // checking if is dir or file
         if(cmd.startsWith('dir')){
             // creates folder in current dir
@@ -87,6 +77,7 @@ for(const cmd of commands) {
                 selected.child.push({
                     name: folder[0],
                     isFolder: true,
+                    size: 0,
                     parent: previous,
                     child : [],
                 })
@@ -112,45 +103,83 @@ for(const cmd of commands) {
 
 const calculateFolders = (files) => {
     if(files.child.length === 0){
-        const retVal = files.child.size;
-        //console.log(JSON.stringify(retVal), ',');
+        const retVal = [files.isFolder ? 0 : files.size, files.isFolder]
+       //console.log(JSON.stringify(retVal), ',');
         return retVal;
     }
-    let temp = 0;
-    //console.log(files)
-    for(const file in files.child){
-       //console.log('here ' + JSON.stringify(files.child[file].child.length))
-        if(files.child[file].child.length > 0){
-         // console.log('here ' + JSON.stringify(files.child[file]))
-           const retVal =  calculateFolders(files.child[file])
-           console.log('here ' + JSON.stringify(retVal))
-          
-          // temp += retVal ? 
+
+    const childSizes = files.child.map(child => {
+        const value = calculateFolders(child);
+        console.log({value})
+        if(value.includes(true)){
+            return value[1];
+        } else {
+            return value[0]
         }
-     
         
+    });
+    let childTotals = 0;
+    for (let i = 0; i < childSizes.length; i++) {
+        childTotals += childSizes[i];
     }
-   // console.log(temp)
+
+    const currentSize = files.isFolder ? 0 : files.size
+    const retVal = [currentSize, childTotals, files.isFolder];
+    if(retVal[1] < 100000){
+       // console.log(JSON.stringify(retVal), ',');
+    }
+    
+    return retVal;
+  
+
 }
-
-// console.log('[');
+console.log('[');
 calculateFolders(folders[0])
-// console.log(']');
+console.log(']');
 
-// const arr = [
-//     [0,584,true,"e"] ,
-//     [0,94269,true,"a"] ,
-//     [0,24933642,true,"d"] ,
-//     [0,23352670,true,"/"] ,
-//     ]  
-// let count2 = 0;
-// for(let i = 0; i < arr.length; i++){
-//     if(arr[i][1] < 100000){
-//         console.log(arr[i][1])
-//     }
+const arr = [
+[0,42692,true] ,
+[0,34049,true] ,
+[0,34049,true] ,
+[0,84883,true] ,
+[0,11720,true] ,
+[0,67639,true] ,
+[0,27749,true] ,
+[0,27749,true] ,
+[0,9583,true] ,
+[0,99990,true] ,
+[0,7520,true] ,
+[0,1,true] ,
+[0,1,true] ,
+[0,7521,true] ,
+[0,56573,true] ,
+[0,64573,true] ,
+[0,2,true] ,
+[0,1,true] ,
+[0,1,true] ,
+[0,99770,true] ,
+[0,98160,true] ,
+[0,98160,true] ,
+[0,74360,true] ,
+[0,80203,true] ,
+[0,11300,true] ,
+[0,1,true] ,
+[0,1,true] ,
+[0,4415,true] ,
+[0,1,true] ,
+[0,1,true] ,
+[0,81223,true] ,
+[0,1,true] ,
+[0,1,true] ,
+]  
+let count2 = 0;
+for(let i = 0; i < arr.length; i++){
+    if(arr[i][1] > 3){
+        count2 += arr[i][1]
+    }
 
-// }
-// console.log(count2)
+}
+console.log(count2)
 //console.log('[', calculateFolders(folders[0]), ']');
 
 //console.log(JSON.stringify(folders) + ' ' + current)
