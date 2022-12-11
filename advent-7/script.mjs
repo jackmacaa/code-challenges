@@ -1,20 +1,14 @@
 import { data, input } from './data.mjs'
 
 const findSelected = (folders, current) => {
-    //console.log({current})
-    //console.log('selected ' + JSON.stringify(folders))
-    
     let found = folders.child.find(element => element.name === current)
-   // console.log('FOUND ' + JSON.stringify(found))
     if(found){
         if(found.isFolder === true){
-            //console.log('HERE')
             return found
         }
     }
 
     for(let key in folders.child){
-      // console.log('key' + JSON.stringify(folders.child[key]))
         if(folders.child.length > 0){
            found =  findSelected(folders.child[key], current)
         }
@@ -22,7 +16,6 @@ const findSelected = (folders, current) => {
             return found
         }
     }
-
 }
 // PART 1
 const commands = input.split('\n')
@@ -115,50 +108,40 @@ for(const cmd of commands) {
     }
 
 }
-console.log('FOLDERS ' + JSON.stringify(folders))
+//console.log('FOLDERS ' + JSON.stringify(folders))
 
 const calculateFolders = (file) => {
     if(file.child.length === 0){
-        const retVal = [Number(file.isFolder ? 0 : file.size), file.isFolder, file.name];
-        //console.log(JSON.stringify(retVal), ',');
+        const retVal = [file.isFolder ? 0 : file.size, file.name];
+        console.log(JSON.stringify(retVal), ',');
         return retVal;
     }
 
-    const childSizes = file.child.map(child => {
-        const value = calculateFolders(child);
-        return value[0];
-    });
-    console.log(childSizes)
+    for(let key in file.child){
 
-    let childTotals = 0;
-    for (let i = 0; i < childSizes.length; i++) {
-        childTotals += childSizes[i];
     }
 
-    const currentSize = file.isFolder ? 0 : Number(file.size);
-    const retVal = [currentSize, childTotals, file.isFolder, file.name];
-    console.log(JSON.stringify(retVal), ',');
-    return retVal;
+
 
 }
 console.log('[');
 calculateFolders(folders[0]);
 console.log(']');
 
-const arr = [
-    [0,584,true,"e"] ,
-    [0,94269,true,"a"] ,
-    [0,24933642,true,"d"] ,
-    [0,23352670,true,"/"] ,
-    ]  
-let count2 = 0;
-for(let i = 0; i < arr.length; i++){
-    if(arr[i][1] < 100000){
-        console.log(arr[i][1])
-    }
+// const arr = [
+//     [0,584,true,"e"] ,
+//     [0,94269,true,"a"] ,
+//     [0,24933642,true,"d"] ,
+//     [0,23352670,true,"/"] ,
+//     ]  
+// let count2 = 0;
+// for(let i = 0; i < arr.length; i++){
+//     if(arr[i][1] < 100000){
+//         console.log(arr[i][1])
+//     }
 
-}
-console.log(count2)
+// }
+// console.log(count2)
 //console.log('[', calculateFolders(folders[0]), ']');
 
 //console.log(JSON.stringify(folders) + ' ' + current)
