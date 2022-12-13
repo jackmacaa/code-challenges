@@ -5,19 +5,19 @@
   "parent": "",
   "child": [
     {
-      "name": "a",
+      "name": "/a",
       "isFolder": true,
       "size": 0,
       "parent": "/",
       "child": [
         {
-          "name": "e",
+          "name": "/a/e",
           "isFolder": true,
           "size": 0,
           "parent": "/a",
           "child": [
             {
-              "name": "i",
+              "name": "/a/e/i",
               "isFolder": false,
               "size": 584,
               "child": [],
@@ -26,21 +26,21 @@
           ]
         },
         {
-          "name": "f",
+          "name": "/a/f",
           "isFolder": false,
           "size": 29116,
           "child": [],
           "parent": "/a"
         },
         {
-          "name": "g",
+          "name": "/a/g",
           "isFolder": false,
           "size": 2557,
           "child": [],
           "parent": "/a"
         },
         {
-          "name": "h.lst",
+          "name": "/a/h.lst",
           "isFolder": false,
           "size": 62596,
           "child": [],
@@ -49,48 +49,48 @@
       ]
     },
     {
-      "name": "b.txt",
+      "name": "/b.txt",
       "isFolder": false,
       "size": 14848514,
       "child": [],
       "parent": "/"
     },
     {
-      "name": "c.dat",
+      "name": "/c.dat",
       "isFolder": false,
       "size": 8504156,
       "child": [],
       "parent": "/"
     },
     {
-      "name": "d",
+      "name": "/d",
       "isFolder": true,
       "size": 0,
       "parent": "/",
       "child": [
         {
-          "name": "j",
+          "name": "/d/j",
           "isFolder": false,
           "size": 4060174,
           "child": [],
           "parent": "/d"
         },
         {
-          "name": "d.log",
+          "name": "/d/d.log",
           "isFolder": false,
           "size": 8033020,
           "child": [],
           "parent": "/d"
         },
         {
-          "name": "d.ext",
+          "name": "/d/d.ext",
           "isFolder": false,
           "size": 5626152,
           "child": [],
           "parent": "/d"
         },
         {
-          "name": "k",
+          "name": "/d/k",
           "isFolder": false,
           "size": 7214296,
           "child": [],
