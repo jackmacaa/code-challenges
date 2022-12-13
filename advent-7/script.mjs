@@ -1,7 +1,9 @@
 import { data, input } from './data.mjs'
 
 const findSelected = (folders, current) => {
+    console.log({current})
     let found = folders.child.find(element => element.name === current)
+    console.log({found})
     if(found){
         if(found.isFolder === true){
             return found
@@ -34,6 +36,7 @@ for(const cmd of commands) {
             const folderName = cmd.match(regexCdName)
                 // when cd x is found swaps current to x
                 if(folderName) {
+                    //console.log({previous})
                     current = folderName[0]
                     if(previous === '/'){
                         previous += `${current}`
@@ -75,7 +78,7 @@ for(const cmd of commands) {
             const folder = cmd.match(regexCdName)
             if(selected){
                 selected.child.push({
-                    name: folder[0],
+                    name:folder[0],
                     isFolder: true,
                     size: 0,
                     parent: previous,
@@ -99,7 +102,7 @@ for(const cmd of commands) {
     }
 
 }
-//console.log('FOLDERS ' + JSON.stringify(folders[0]))
+console.log('FOLDERS ' + JSON.stringify(folders[0]))
 
 const calculateFolders = (files) => {
     if(files.child.length === 0){
@@ -151,9 +154,9 @@ function getFolderSize(item) {
     return size
   } 
 
-console.log('[');
-getFolderSize(folders[0])
-console.log(']');
+// console.log('[');
+// getFolderSize(folders[0])
+// console.log(']');
 
 const arr = [
     [ 0, 42692, true, 'fpb' ],

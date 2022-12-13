@@ -1,100 +1,102 @@
-[
+{
+  "name": "/",
+  "isFolder": true,
+  "size": 0,
+  "parent": "",
+  "child": [
     {
-        "name": "/",
-        "isFolder": true,
-        "parent": "",
-        "child": [
+      "name": "a",
+      "isFolder": true,
+      "size": 0,
+      "parent": "/",
+      "child": [
+        {
+          "name": "e",
+          "isFolder": true,
+          "size": 0,
+          "parent": "/a",
+          "child": [
             {
-                "name": "a",
-                "isFolder": true,
-                "parent": "/",
-                "child": [
-                    {
-                        "name": "e",
-                        "isFolder": true,
-                        "parent": "/a",
-                        "child": [
-                            {
-                                "name": "i",
-                                "isFolder": false,
-                                "size": 584,
-                                "child": [],
-                                "parent": "/a/e"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "f",
-                        "isFolder": false,
-                        "size": 29116,
-                        "child": [],
-                        "parent": "/a"
-                    },
-                    {
-                        "name": "g",
-                        "isFolder": false,
-                        "size": 2557,
-                        "child": [],
-                        "parent": "/a"
-                    },
-                    {
-                        "name": "h.lst",
-                        "isFolder": false,
-                        "size": 62596,
-                        "child": [],
-                        "parent": "/a"
-                    }
-                ]
-            },
-            {
-                "name": "b.txt",
-                "isFolder": false,
-                "size": 14848514,
-                "child": [],
-                "parent": "/"
-            },
-            {
-                "name": "c.dat",
-                "isFolder": false,
-                "size": 8504156,
-                "child": [],
-                "parent": "/"
-            },
-            {
-                "name": "d",
-                "isFolder": true,
-                "parent": "/",
-                "child": [
-                    {
-                        "name": "j",
-                        "isFolder": false,
-                        "size": 4060174,
-                        "child": [],
-                        "parent": "/d"
-                    },
-                    {
-                        "name": "d.log",
-                        "isFolder": false,
-                        "size": 8033020,
-                        "child": [],
-                        "parent": "/d"
-                    },
-                    {
-                        "name": "d.ext",
-                        "isFolder": false,
-                        "size": 5626152,
-                        "child": [],
-                        "parent": "/d"
-                    },
-                    {
-                        "name": "k",
-                        "isFolder": false,
-                        "size": 7214296,
-                        "child": [],
-                        "parent": "/d"
-                    }
-                ]
+              "name": "i",
+              "isFolder": false,
+              "size": 584,
+              "child": [],
+              "parent": "/a/e"
             }
-        ]
+          ]
+        },
+        {
+          "name": "f",
+          "isFolder": false,
+          "size": 29116,
+          "child": [],
+          "parent": "/a"
+        },
+        {
+          "name": "g",
+          "isFolder": false,
+          "size": 2557,
+          "child": [],
+          "parent": "/a"
+        },
+        {
+          "name": "h.lst",
+          "isFolder": false,
+          "size": 62596,
+          "child": [],
+          "parent": "/a"
+        }
+      ]
+    },
+    {
+      "name": "b.txt",
+      "isFolder": false,
+      "size": 14848514,
+      "child": [],
+      "parent": "/"
+    },
+    {
+      "name": "c.dat",
+      "isFolder": false,
+      "size": 8504156,
+      "child": [],
+      "parent": "/"
+    },
+    {
+      "name": "d",
+      "isFolder": true,
+      "size": 0,
+      "parent": "/",
+      "child": [
+        {
+          "name": "j",
+          "isFolder": false,
+          "size": 4060174,
+          "child": [],
+          "parent": "/d"
+        },
+        {
+          "name": "d.log",
+          "isFolder": false,
+          "size": 8033020,
+          "child": [],
+          "parent": "/d"
+        },
+        {
+          "name": "d.ext",
+          "isFolder": false,
+          "size": 5626152,
+          "child": [],
+          "parent": "/d"
+        },
+        {
+          "name": "k",
+          "isFolder": false,
+          "size": 7214296,
+          "child": [],
+          "parent": "/d"
+        }
+      ]
     }
-]
+  ]
+}
