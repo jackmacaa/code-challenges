@@ -1033,3 +1033,34 @@ $ ls
 8033020 d.log
 5626152 d.ext
 7214296 k`
+
+export const crazy = 
+`$ cd /
+$ ls
+dir a
+14848514 b.txt
+$ cd a
+$ ls
+dir e
+29116 f
+$ cd e
+$ ls
+584 i
+dir g
+$ cd g
+$ ls
+dir hh
+$ cd hh
+$ ls
+dir fart
+$ cd fart
+$ ls
+9999 file.text
+$ cd ..
+$ cd ..
+$ cd d
+$ ls
+4060174 j
+8033020 d.log
+5626152 d.ext
+7214296 k`
