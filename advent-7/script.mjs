@@ -1,8 +1,8 @@
-import { buildTree } from "../lib.mjs";
+import { buildTree } from "./lib.mjs";
 import { data, input, crazy } from './data.mjs'
 
-const tree = buildTree(crazy);
-console.log(JSON.stringify(tree))
+const tree = buildTree(data);
+//console.log(JSON.stringify(tree))
 
 // FUNCTIONS to count folder sizes - MINE
 const addFolderSizes = (folders) => {
@@ -34,7 +34,7 @@ const calculateFolders = (files) => {
     }
     const childSizes = files.child.map(child => {
         const value = calculateFolders(child);
-        //console.log({value})
+        console.log({value})
         if(value.includes(true)){
             if(value[1] < 100000){
             //console.log(value)
@@ -51,11 +51,11 @@ const calculateFolders = (files) => {
     }
     const currentSize = files.isFolder ? 0 : files.size
     const retVal = [currentSize, childTotals, files.isFolder, files.name];
-    console.log(retVal)
-    //if(childTotals < 100000){
+    //console.log(retVal)
+    if(childTotals < 100000){
         arr2.push(retVal);
-    //}
-    return retVal;
+    }
+    return retVal;node
 }
 // console.log('[');
 calculateFolders(tree)
@@ -75,6 +75,57 @@ function getFolderSize(item) {
 // console.log('[');
 // getFolderSize(tree)
 // console.log(']');
+
+function calculateDirectorySize(dir) {
+    const subdirectories = dir.child.filter(child => child.isFolder).map(
+        calculateDirectorySize
+    );
+
+    const files = dir.child.filter(child => !child.isFolder).map(file => file.size);
+
+    return [...subdirectories, ...files].reduce((total, item) => total + item, 0);
+}
+
+const testFolderInner = {
+    "name": "/wlqhpwqv/zfhnw/zdv/pjdhn/rvbw/cjdhwbv",
+    "isFolder": true,
+    "size": 0,
+    "parent": "/wlqhpwqv/zfhnw/zdv/pjdhn/rvbw",
+    "child": [
+      {
+        "name": "/wlqhpwqv/zfhnw/zdv/pjdhn/rvbw/cjdhwbv/tbhb",
+        "isFolder": false,
+        "size": 302711,
+        "child": [],
+        "parent": "/wlqhpwqv/zfhnw/zdv/pjdhn/rvbw/cjdhwbv"
+      },
+      {
+        "name": "/wlqhpwqv/zfhnw/zdv/pjdhn/rvbw/cjdhwbv/tmj.frb",
+        "isFolder": false,
+        "size": 173182,
+        "child": [],
+        "parent": "/wlqhpwqv/zfhnw/zdv/pjdhn/rvbw/cjdhwbv"
+      }
+    ]
+  }
+
+  function listDirectorySizes(dir, map){
+    const childDirs = dir.child.filter(child => child.isFolder);
+
+    for (const child of childDirs) {
+        map = {
+            ...map,
+            [child.name]: calculateDirectorySize(child),
+            ...listDirectorySizes(child, map)
+        }        
+    }
+
+    return map;
+  }
+
+  const directoryMap = listDirectorySizes(tree, {});
+
+  console.log("Torbs code", Object.values(directoryMap).filter(size => size <= 100000).reduce((a, b) => a + b, 0));
 
 // Array from finding folders sizes
 const arr = [
