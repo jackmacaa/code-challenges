@@ -17,6 +17,8 @@ function fibBetterRecursive(num) {
 
     return helper(num);
 }
+console.log(fibBetterRecursive(10))
+
 console.time('fib')
 let total = 0;
 let current = 0;

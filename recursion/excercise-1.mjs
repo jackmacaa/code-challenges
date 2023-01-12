@@ -42,12 +42,12 @@ function sumTo(num) {
 //console.log(sumTo(5))
 
 // Calculate factorial
-function factorial(num) {
-    if (num === 1) {
-        return num
-    }
-    return factorial(num - 1) * num;
-}
+// function factorial(num) {
+//     if (num === 1) {
+//         return num
+//     }
+//     return factorial(num - 1) * num;
+// }
 //console.log(factorial(5))
 
 // Fibonacci Bad
@@ -117,4 +117,13 @@ function printList(list) {
         return printList(list.next) + console.log(list.value)
     }
 }
-printList(list)
+//printList(list)
+
+function factorial(num) {
+    if(num === 1) return num
+
+    return factorial(num - 1) * num
+}
+
+//console.log(factorial(30))
+
