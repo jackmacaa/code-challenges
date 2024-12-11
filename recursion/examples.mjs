@@ -11,3 +11,12 @@ function findSolution(target) {
     return find(1, "1");
 }  
 console.log(findSolution(8));
+
+const arr = [
+    [1,5],
+    [1,2,[3]],
+    [2,[2,2]],
+    [1,[1,[2,2]]],
+    [1,3,2]
+]
+
